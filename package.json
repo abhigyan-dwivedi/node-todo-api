@@ -1,0 +1,16 @@
+{
+  "name": "node-todo-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abhigyan Dwivedi",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2",
+    "mongodb": "^2.2.25",
+    "mongoose": "^4.9.3"
+  }
+}
