@@ -1,41 +1,36 @@
-var {mongoose}=require('./db/mongoose')
+var express =require('express');
+var bodyParser =require('body-parser');
 
+
+var {mongoose}=require('./db/mongoose')
 var {Todo}=require('./models/todo');
 var {User}=require('./models/user');
 
 
-// console.log(mongoose);
-//
-// /*
-//
-//
-// var user=new User({
-//   email:'abhigyan.dwivedi@gmail.com'
-// });
-//
-// var savePromise=user.save();
-//
-// savePromise.then((doc)=>{
-//   console.log('Document of User Saved to DB',doc);
-// },(err)=>{
-//   console.log('User Not Saved To DB',err);
-// });
-//
-//
-// */
-// var newTodo=new Todo({
-//   //text:'',
-//   text:'Saving the better Todo',
-//   //text:true
-//   // completed:true,
-//   // completedAt:Date.now()
-// });
-//
-// savePromise=newTodo.save();
-//
-// savePromise.then((doc)=>{
-//   console.log('Saved Todo');
-//   console.log(JSON.stringify(doc))
-// },(err)=>{
-//   console.log('Unable to save todo',err);
-// });
+
+var app=express();
+
+app.use(bodyParser.json());
+
+
+app.post('/todos',(req,res)=>{
+    var todo=new Todo({
+      text:req.body.text
+    });
+
+    console.log(JSON.stringify(todo));
+
+    savePromise=todo.save();
+    savePromise.then((doc)=>{
+      res.status(200).send(doc);
+    },(e)=>{
+      res.status(404).send(e);
+    });
+
+
+});
+
+
+app.listen(3000,()=>{
+  console.log('Started on port 3000');
+});
