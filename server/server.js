@@ -13,8 +13,17 @@ app.use(bodyParser.json());
 
 
 
-app.get('/',(req,res)=>{
-  console.log('req recieved');
+app.get('/todos',(req,res)=>{
+  console.log('GET request recieved');
+
+  Todo.find().then((todos)=>{
+    res.status(200).send(todos);
+  },(err)=>{
+      res.status(400).end(err);
+  }); //Todo.find():Returns all Todos
+
+
+
 });
 
 
