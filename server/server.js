@@ -17,13 +17,13 @@ app.get('/todos',(req,res)=>{
   console.log('GET request recieved');
 
   Todo.find().then((todos)=>{
-    res.status(200).send(todos);
+    res.send({  //So that we can associate other values with todos
+      todos,
+      code:'asdf'
+    });
   },(err)=>{
-      res.status(400).end(err);
+      res.status(400).send(err);
   }); //Todo.find():Returns all Todos
-
-
-
 });
 
 
@@ -41,24 +41,13 @@ app.post('/todos',(req,res)=>{
     },(e)=>{
       res.status(400).send(e);
     });
-
     // res.send({textOutput:'Sent from Client'});
-
 });
-
-
-
-
-
-
-
-
 
 var PORT=3000;
 app.listen(PORT,()=>{
   console.log(`Started on ${PORT}`);
 });
-
 
 module.exports={app};
 
